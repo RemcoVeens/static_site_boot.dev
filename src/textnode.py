@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class TextType(Enum):
     TEXT = "text"
     BOLD = "bold"
@@ -8,8 +9,9 @@ class TextType(Enum):
     LINK = "link"
     IMAGE = "images"
 
+
 class TextNode:
-    def __init__(self, text, text_type:TextType, url:str|None = None):
+    def __init__(self, text, text_type: TextType, url: str | None = None):
         self.text = text
         self.text_type = TextType(text_type)
         self.url = url
@@ -18,8 +20,10 @@ class TextNode:
         return f"TextNode({self.text}, {self.text_type.value}, {self.url})"
 
     def __eq__(self, other):
-        return all([
-            self.text == other.text,
-            self.text_type == other.text_type,
-            self.url == other.url
-        ])
+        return all(
+            [
+                self.text == other.text,
+                self.text_type == other.text_type,
+                self.url == other.url,
+            ]
+        )

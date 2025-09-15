@@ -1,5 +1,11 @@
 class HTMLNode:
-    def __init__(self, tag:str|None = None, value:str|None=None, children:list|None=None, props:dict|None=None):
+    def __init__(
+        self,
+        tag: str | None = None,
+        value: str | None = None,
+        children: list | None = None,
+        props: dict | None = None,
+    ):
         """
         tag - A string representing the HTML tag name (e.g. "p", "a", "h1", etc.)
         value - A string representing the value of the HTML tag (e.g. the text inside a paragraph)
@@ -21,8 +27,9 @@ class HTMLNode:
     def __repr__(self):
         return f"HTMLNode({self.tag=}, {self.value=}, {self.children=}, {self.props=})"
 
+
 class LeafNode(HTMLNode):
-    def __init__(self, tag:str|None, value:str|None, props:dict|None=None):
+    def __init__(self, tag: str | None, value: str | None, props: dict | None = None):
         super().__init__(tag, value, props=props)
 
     def to_html(self):
@@ -34,8 +41,11 @@ class LeafNode(HTMLNode):
                 main = f"<{self.tag}>{main}</{self.tag}>"
         return main
 
+
 class ParentNode(HTMLNode):
-    def __init__(self, tag:str|None, children:list|None, props:dict|None=None):
+    def __init__(
+        self, tag: str | None, children: list | None, props: dict | None = None
+    ):
         super().__init__(tag, None, children=children, props=props)
 
     def to_html(self):
