@@ -25,7 +25,7 @@ class HTMLNode:
         return " ".join([f'{key}="{value}"' for key, value in self.props.items()])
 
     def __repr__(self):
-        return f"HTMLNode({self.tag=}, {self.value=}, {self.children=}, {self.props=})"
+        return f"{self.__class__.__name__}({self.tag=}, {self.value=}, {self.children=}, {self.props=})"
 
 
 class LeafNode(HTMLNode):
@@ -33,7 +33,11 @@ class LeafNode(HTMLNode):
         super().__init__(tag, value, props=props)
 
     def to_html(self):
-        main = f"{self.value}"
+        # assert self.value
+        if not self.value:
+            main = ""
+        else:
+            main = f"{self.value}"
         if self.tag:
             if self.props:
                 main = f"<{self.tag} {self.props_to_html()}>{main}</{self.tag}>"

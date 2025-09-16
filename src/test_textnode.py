@@ -6,6 +6,7 @@ from functions import (
     split_nodes_delimiter,
     extract_markdown_images,
     extract_markdown_links,
+    extract_title,
     split_nodes_link,
     split_nodes_image,
     text_to_textnodes,
@@ -209,6 +210,11 @@ class TestTextNode(unittest.TestCase):
         ]
         output = text_to_textnodes(input)
         self.assertListEqual(ex_output, output)
+
+    def test_extract_title(self):
+        markdown = "# Hello World"
+        title = extract_title(markdown)
+        self.assertEqual("Hello World", title)
 
 
 if __name__ == "__main__":

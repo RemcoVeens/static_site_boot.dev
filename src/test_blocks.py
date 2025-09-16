@@ -57,7 +57,7 @@ This is the same paragraph on a new line
 
     def test_block_to_block_code(self):
         self.assertEqual(
-            block_to_block_type("```python \nprint('Hello World')\n```"),
+            block_to_block_type("```python\nprint('Hello World')\n```"),
             BlockType.CODE,
         )
 
