@@ -1,4 +1,5 @@
 import shutil
+import sys
 import os
 from functions import generate_pages_recursive
 from pathlib import Path
@@ -12,19 +13,26 @@ def mover(source_dir, destination_dir):
         I recommend logging the path of each file you copy, so you can see what's happening as you run and debug your code.
     """
     print("cleaning destination directory...")
+    Path(destination_dir).mkdir(parents=True, exist_ok=True)
     shutil.rmtree(destination_dir)
     print("Copying files...")
     shutil.copytree(source_dir, destination_dir)
     print(os.listdir(destination_dir))
 
 
-def main():
+def main(basepath):
     source_dir = "static"
-    destination_dir = "public"
+    destination_dir = "docs"
     mover(source_dir, destination_dir)
-    # generate_page("content/index.md", "template.html", "public/index.html")
-    generate_pages_recursive(Path("content"), "template.html", Path("public"))
+    generate_pages_recursive(
+        Path("content"), "template.html", Path(destination_dir), basepath=basepath
+    )
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+    else:
+        basepath = "/"
+    # print(basepath)
+    main(basepath)
